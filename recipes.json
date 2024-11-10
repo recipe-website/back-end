@@ -1,0 +1,220 @@
+{
+  "results": [
+    {
+      "canonical_id": "recipe:4704",
+      "credits": [
+        {
+          "name": "Isabel Castillo"
+        },
+        {
+          "name": "Karlee Rotoly"
+        }
+      ],
+      "description": "This chicken salad is a lunchtime delight! Packed with creamy avocado, tender chicken, and crunchy veggies, it's a healthy and satisfying meal that won't weigh you down. Tossed in a tangy yogurt dressing with a hint of spice, it's a flavor explosion that's perfect for a light meal.",
+      "instructions": [
+        {
+          "display_text": "In a blender or food processor, combine the yogurt, lime juice, pepper, and chili powder and pulse to combine. Add \u00bd of the avocado and blend until creamy."
+        },
+        {
+          "display_text": "In a medium bowl, combine the chicken, yogurt sauce, celery, the remaining \u00bd avocado, onion, and salt. Mix until well combined."
+        },
+        {
+          "display_text": "Serve on low-carb bread and garnish with cilantro, or as desired."
+        },
+        {
+          "display_text": "Enjoy!"
+        }
+      ],
+      "language": "eng",
+      "name": "Low-Carb Avocado Chicken Salad",
+      "num_servings": 4,
+      "nutrition": {
+        "calories": 249,
+        "carbohydrates": 13,
+        "fat": 8,
+        "fiber": 3,
+        "protein": 29,
+        "sugar": 8
+      },
+      "components":   [
+        {
+          "ingredient": {
+            "name": "plain greek yogurt"
+          },
+          "measurements": [
+            {
+              "quantity": "\u2154",
+              "unit": {
+                "name": "cup",
+                "system": "imperial"
+              }
+            },
+            {
+              "quantity": "190",
+              "unit": {
+                "name": "gram",
+                "system": "metric"
+              }
+            }
+          ],
+          "raw_text": " plain Greek yogurt"
+        },
+        {
+          "ingredient": {
+            "name": "lime juice"
+          },
+          "measurements": [
+            {
+              "quantity": "1",
+              "unit": {
+                "name": "tablespoon",
+                "system": "imperial"
+              }
+            }
+          ],
+          "raw_text": "1 tablespoon lime juice"
+        },
+        {
+          "ingredient": {
+            "name": "pepper"
+          },
+          "measurements": [
+            {
+              "quantity": "",
+              "unit": {
+                "name": "",
+                "system": "none"
+              }
+            }
+          ],
+          "raw_text": "Pepper, to taste"
+        },
+        {
+          "ingredient": {
+            "name": "chili powder"
+          },
+          "measurements": [
+            {
+              "quantity": "\u215b",
+              "unit": {
+                "name": "teaspoon",
+                "system": "imperial"
+              }
+            }
+          ],
+          "raw_text": "\u215b teaspoon chili powder"
+        },
+        {
+          "ingredient": {
+            "name": "avocado"
+          },
+          "measurements": [
+            {
+              "quantity": "1",
+              "unit": {
+                "name": "",
+                "system": "none"
+              }
+            }
+          ],
+          "raw_text": "1 avocado, cubed, divided"
+        },
+        {
+          "ingredient": {
+            "name": "chicken breast"
+          },
+          "measurements": [
+            {
+              "quantity": "2",
+              "unit": {
+                "name": "",
+                "system": "none"
+              }
+            }
+          ],
+          "raw_text": "2 chicken breasts, cooked and shredded"
+        },
+        {
+          "ingredient": {
+            "name": "celery"
+          },
+          "measurements": [
+            {
+              "quantity": "1",
+              "unit": {
+                "name": "stalk",
+                "system": "none"
+              }
+            }
+          ],
+          "raw_text": "1 celery stalk, diced"
+        },
+        {
+          "ingredient": {
+            "name": "diced red onion"
+          },
+          "measurements": [
+            {
+              "quantity": "2",
+              "unit": {
+                "name": "tablespoon",
+                "system": "imperial"
+              }
+            }
+          ],
+          "raw_text": "2 tablespoons diced red onion"
+        },
+        {
+          "ingredient": {
+            "name": "kosher salt"
+          },
+          "measurements": [
+            {
+              "quantity": "0",
+              "unit": {
+                "name": "",
+                "system": "none"
+              }
+            }
+          ],
+          "raw_text": "Kosher salt, to taste"
+        },
+        {
+          "ingredient": {
+            "name": "low-carb bread"
+          },
+          "measurements": [
+            {
+              "quantity": "0",
+              "unit": {
+                "name": "",
+                "system": "none"
+              }
+            }
+          ],
+          "raw_text": "Low-carb bread, for serving, optional"
+        },
+        {
+          "ingredient": {
+            "name": "fresh cilantro leaves"
+          },
+          "measurements": [
+            {
+              "quantity": "0",
+              "unit": {
+                "name": "",
+                "system": "none"
+              }
+            }
+          ],
+          "raw_text": "Fresh cilantro leaves, for garnish"
+        }
+      ],
+      "total_time_minutes": 15,
+      "total_time_tier": {
+        "display_tier": "Under 15 minutes",
+        "tier": "under_15_minutes"
+      }
+    }
+  ]
+}
