@@ -36,180 +36,185 @@
         "protein": 29,
         "sugar": 8
       },
-      "components":   [
+      "sections": [
         {
-          "ingredient": {
-            "name": "plain greek yogurt"
-          },
-          "measurements": [
+          "components":   [
             {
-              "quantity": "\u2154",
-              "unit": {
-                "name": "cup",
-                "system": "imperial"
-              }
+              "ingredient": {
+                "name": "plain greek yogurt"
+              },
+              "measurements": [
+                {
+                  "quantity": "\u2154",
+                  "unit": {
+                    "name": "cup",
+                    "system": "imperial"
+                  }
+                },
+                {
+                  "quantity": "190",
+                  "unit": {
+                    "name": "gram",
+                    "system": "metric"
+                  }
+                }
+              ],
+              "raw_text": " plain Greek yogurt"
             },
             {
-              "quantity": "190",
-              "unit": {
-                "name": "gram",
-                "system": "metric"
-              }
-            }
-          ],
-          "raw_text": " plain Greek yogurt"
-        },
-        {
-          "ingredient": {
-            "name": "lime juice"
-          },
-          "measurements": [
+              "ingredient": {
+                "name": "lime juice"
+              },
+              "measurements": [
+                {
+                  "quantity": "1",
+                  "unit": {
+                    "name": "tablespoon",
+                    "system": "imperial"
+                  }
+                }
+              ],
+              "raw_text": "1 tablespoon lime juice"
+            },
             {
-              "quantity": "1",
-              "unit": {
-                "name": "tablespoon",
-                "system": "imperial"
-              }
-            }
-          ],
-          "raw_text": "1 tablespoon lime juice"
-        },
-        {
-          "ingredient": {
-            "name": "pepper"
-          },
-          "measurements": [
+              "ingredient": {
+                "name": "pepper"
+              },
+              "measurements": [
+                {
+                  "quantity": "",
+                  "unit": {
+                    "name": "",
+                    "system": "none"
+                  }
+                }
+              ],
+              "raw_text": "Pepper, to taste"
+            },
             {
-              "quantity": "",
-              "unit": {
-                "name": "",
-                "system": "none"
-              }
-            }
-          ],
-          "raw_text": "Pepper, to taste"
-        },
-        {
-          "ingredient": {
-            "name": "chili powder"
-          },
-          "measurements": [
+              "ingredient": {
+                "name": "chili powder"
+              },
+              "measurements": [
+                {
+                  "quantity": "\u215b",
+                  "unit": {
+                    "name": "teaspoon",
+                    "system": "imperial"
+                  }
+                }
+              ],
+              "raw_text": "\u215b teaspoon chili powder"
+            },
             {
-              "quantity": "\u215b",
-              "unit": {
-                "name": "teaspoon",
-                "system": "imperial"
-              }
-            }
-          ],
-          "raw_text": "\u215b teaspoon chili powder"
-        },
-        {
-          "ingredient": {
-            "name": "avocado"
-          },
-          "measurements": [
+              "ingredient": {
+                "name": "avocado"
+              },
+              "measurements": [
+                {
+                  "quantity": "1",
+                  "unit": {
+                    "name": "",
+                    "system": "none"
+                  }
+                }
+              ],
+              "raw_text": "1 avocado, cubed, divided"
+            },
             {
-              "quantity": "1",
-              "unit": {
-                "name": "",
-                "system": "none"
-              }
-            }
-          ],
-          "raw_text": "1 avocado, cubed, divided"
-        },
-        {
-          "ingredient": {
-            "name": "chicken breast"
-          },
-          "measurements": [
+              "ingredient": {
+                "name": "chicken breast"
+              },
+              "measurements": [
+                {
+                  "quantity": "2",
+                  "unit": {
+                    "name": "",
+                    "system": "none"
+                  }
+                }
+              ],
+              "raw_text": "2 chicken breasts, cooked and shredded"
+            },
             {
-              "quantity": "2",
-              "unit": {
-                "name": "",
-                "system": "none"
-              }
-            }
-          ],
-          "raw_text": "2 chicken breasts, cooked and shredded"
-        },
-        {
-          "ingredient": {
-            "name": "celery"
-          },
-          "measurements": [
+              "ingredient": {
+                "name": "celery"
+              },
+              "measurements": [
+                {
+                  "quantity": "1",
+                  "unit": {
+                    "name": "stalk",
+                    "system": "none"
+                  }
+                }
+              ],
+              "raw_text": "1 celery stalk, diced"
+            },
             {
-              "quantity": "1",
-              "unit": {
-                "name": "stalk",
-                "system": "none"
-              }
-            }
-          ],
-          "raw_text": "1 celery stalk, diced"
-        },
-        {
-          "ingredient": {
-            "name": "diced red onion"
-          },
-          "measurements": [
+              "ingredient": {
+                "name": "diced red onion"
+              },
+              "measurements": [
+                {
+                  "quantity": "2",
+                  "unit": {
+                    "name": "tablespoon",
+                    "system": "imperial"
+                  }
+                }
+              ],
+              "raw_text": "2 tablespoons diced red onion"
+            },
             {
-              "quantity": "2",
-              "unit": {
-                "name": "tablespoon",
-                "system": "imperial"
-              }
-            }
-          ],
-          "raw_text": "2 tablespoons diced red onion"
-        },
-        {
-          "ingredient": {
-            "name": "kosher salt"
-          },
-          "measurements": [
+              "ingredient": {
+                "name": "kosher salt"
+              },
+              "measurements": [
+                {
+                  "quantity": "0",
+                  "unit": {
+                    "name": "",
+                    "system": "none"
+                  }
+                }
+              ],
+              "raw_text": "Kosher salt, to taste"
+            },
             {
-              "quantity": "0",
-              "unit": {
-                "name": "",
-                "system": "none"
-              }
-            }
-          ],
-          "raw_text": "Kosher salt, to taste"
-        },
-        {
-          "ingredient": {
-            "name": "low-carb bread"
-          },
-          "measurements": [
+              "ingredient": {
+                "name": "low-carb bread"
+              },
+              "measurements": [
+                {
+                  "quantity": "0",
+                  "unit": {
+                    "name": "",
+                    "system": "none"
+                  }
+                }
+              ],
+              "raw_text": "Low-carb bread, for serving, optional"
+            },
             {
-              "quantity": "0",
-              "unit": {
-                "name": "",
-                "system": "none"
-              }
+              "ingredient": {
+                "name": "fresh cilantro leaves"
+              },
+              "measurements": [
+                {
+                  "quantity": "0",
+                  "unit": {
+                    "name": "",
+                    "system": "none"
+                  }
+                }
+              ],
+              "raw_text": "Fresh cilantro leaves, for garnish"
             }
-          ],
-          "raw_text": "Low-carb bread, for serving, optional"
-        },
-        {
-          "ingredient": {
-            "name": "fresh cilantro leaves"
-          },
-          "measurements": [
-            {
-              "quantity": "0",
-              "unit": {
-                "name": "",
-                "system": "none"
-              }
-            }
-          ],
-          "raw_text": "Fresh cilantro leaves, for garnish"
+          ]
         }
       ],
+
       "total_time_minutes": 15,
       "total_time_tier": {
         "display_tier": "Under 15 minutes",

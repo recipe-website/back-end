@@ -1,5 +1,6 @@
 package com.recipe.recipewebsite.infrastructure.tastyAPI.response.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RecipeListResponseDTO {
     private List<RecipeListResult> results;
 }

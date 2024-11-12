@@ -6,12 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RecipeMeasurement {
-    String quantity;
-    RecipeUnit unit;
+public class RecipeSection {
+    private List<RecipeComponent> components;
 }

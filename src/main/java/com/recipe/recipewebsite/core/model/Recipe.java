@@ -8,6 +8,7 @@ import com.recipe.recipewebsite.core.service.dto.RecipeInitialDTO;
 import com.recipe.recipewebsite.infrastructure.tastyAPI.response.dto.*;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 @Getter
@@ -64,20 +65,27 @@ public class Recipe {
                 .toList();
 
 
-        List<RecipeIngredientVO> componentsList = recipeListResult.getComponents()
-                .stream()
-                .map(component -> new RecipeIngredientVO(
-                        component.getIngredient().getName(),
-                        component.getMeasurements()
-                                .stream()
-                                .map(recipeMeasurement -> new RecipeMeasurementVO(
-                                        recipeMeasurement.getQuantity(),
-                                        recipeMeasurement.getUnit().getName(),
-                                        recipeMeasurement.getUnit().getSystem()
-                                )).toList(),
-                        component.getRaw_text()
-                ))
-                .toList();
+        List<RecipeIngredientVO> componentsList = new ArrayList<>();
+        recipeListResult.getSections()
+                .forEach(section ->{
+                    List<RecipeIngredientVO> components = section.getComponents()
+                        .stream()
+                        .map(component -> new RecipeIngredientVO(
+                                component.getIngredient().getName(),
+                                component.getMeasurements()
+                                        .stream()
+                                        .map(recipeMeasurement -> new RecipeMeasurementVO(
+                                                recipeMeasurement.getQuantity(),
+                                                recipeMeasurement.getUnit().getName(),
+                                                recipeMeasurement.getUnit().getSystem()
+                                        )).toList(),
+                                component.getRaw_text()
+                        ))
+                        .toList();
+                    componentsList.addAll(components);
+                });
+
+
 
         return new Recipe(
                 recipeListResult.getName(),

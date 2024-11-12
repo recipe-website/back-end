@@ -1,5 +1,6 @@
 package com.recipe.recipewebsite.infrastructure.tastyAPI.response.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RecipeListResult {
     String canonical_id;
     List<RecipeAuthor> credits;
@@ -20,7 +22,7 @@ public class RecipeListResult {
     String name;
     Integer num_servings;
     RecipeNutrition nutrition;
-    List<RecipeComponent> components;
+    List<RecipeSection> sections;
     Double total_time_minutes;
     RecipeTimeTier total_time_tier;
 }
