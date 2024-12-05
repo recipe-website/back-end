@@ -5,11 +5,9 @@ import com.recipe.recipewebsite.infrastructure.tastyAPI.response.dto.RecipeListR
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import java.io.BufferedReader;
 import java.io.IOException;
 
 
-import java.io.*;
 import java.net.*;
 
 
@@ -31,22 +29,7 @@ public class GetAllRecipesFromAPIUseCase {
     urlConnection.setRequestProperty("X-RapidAPI-Host", "tasty.p.rapidapi.com");
 
     ObjectMapper mapper = new ObjectMapper();
-
-    BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-    StringBuilder stringBuilder = new StringBuilder();
-    String line;
-    String ls = System.lineSeparator();
-
-    while ((line = reader.readLine()) != null) {
-        stringBuilder.append(line);
-        stringBuilder.append(ls);
-    }
-    // delete the last new line separator
-    stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-    reader.close();
-
-    String content = stringBuilder.toString();
-        return  mapper.readValue(content, RecipeListResponseDTO.class);
+    return  mapper.readValue(urlConnection.getInputStream(), RecipeListResponseDTO.class);
     }
 
 
