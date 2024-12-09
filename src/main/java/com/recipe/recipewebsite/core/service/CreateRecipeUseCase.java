@@ -4,7 +4,6 @@ import com.recipe.recipewebsite.core.model.Recipe;
 import com.recipe.recipewebsite.core.model.RecipeSnapshot;
 import com.recipe.recipewebsite.core.service.dto.RecipeInitialDTO;
 import com.recipe.recipewebsite.core.service.ports.out.CreateRecipeDAO;
-import com.recipe.recipewebsite.infrastructure.dbadapter.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,10 @@ public class CreateRecipeUseCase {
         public UUID createRecipe(RecipeInitialDTO recipeInitialDTO) {
             Recipe recipe = Recipe.fromInitialDTO(recipeInitialDTO);
             RecipeSnapshot recipeSnapshot = recipe.toSnapshot();
-            createRecipeDAO.createRecipe(recipeSnapshot);
-            return recipeSnapshot.getRecipeId().recipeId();
+            if (createRecipeDAO.createRecipe(recipeSnapshot)){
+                return recipeSnapshot.getRecipeId().recipeId();
+            }
+
+            return null;
         }
 }

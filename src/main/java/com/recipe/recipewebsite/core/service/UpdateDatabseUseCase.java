@@ -32,8 +32,10 @@ public class UpdateDatabseUseCase {
                 throw new RuntimeException(e);
             }
             for (RecipeSnapshot recipeSnapshot : recipesFromTastyApi){
-                createRecipeDAO.createRecipe(recipeSnapshot);
-                recipesAdded.add(recipeSnapshot.getRecipeId().recipeId());
+                if (createRecipeDAO.createRecipe(recipeSnapshot)){
+                    recipesAdded.add(recipeSnapshot.getRecipeId().recipeId());
+                }
+
             }
             return recipesAdded;
         }

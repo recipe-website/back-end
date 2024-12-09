@@ -13,7 +13,7 @@ public class IngredientDatabaseMapper {
                 recipeIngredientVO.getIngredientName(),
                 new ArrayList<>(),
                 recipeIngredientVO.getRawText(),
-                null
+                new ArrayList<>()
         );
     }
 }

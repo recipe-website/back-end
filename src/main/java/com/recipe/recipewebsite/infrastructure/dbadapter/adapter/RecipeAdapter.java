@@ -25,20 +25,20 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO {
     private final TierRepository tierRepository;
 
     @Override
-    public void createRecipe(RecipeSnapshot recipeSnapshot) {
+    public boolean createRecipe(RecipeSnapshot recipeSnapshot) {
 
         RecipeEntity  recipeEntity  = recipeRepository.findFirstByCanonicalId(recipeSnapshot.getCanonicalId());
         if (recipeEntity != null){
             System.out.println("recipe with " +recipeSnapshot.getCanonicalId() + " already exists in the database");
-            return;
+            return false;
         }
         recipeEntity = RecipeDatabaseMapper.fromSnapshot(recipeSnapshot);
         recipeRepository.save(recipeEntity);
-
+        //optional hibernete pobiera optional isEmpty isNotEmpty jest pusty optional
         //prawdopodnie da się to zrobić prościej ↓
         for(String name : recipeSnapshot.getCreditList()){
             CreditEnity creditEnity = creditRepository.findFirstByName(name);
-            if (creditEnity == null){//
+            if (creditEnity == null){
                 creditEnity = CreditDatabaseMapper.fromName(name);
             }
             creditRepository.save(creditEnity);
@@ -54,13 +54,13 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO {
         tierEntity.getRecipeList().add(recipeEntity);
         for (RecipeIngredientVO ingredientVo : recipeSnapshot.getComponentList()){
             IngredientEntity ingredientEntity = ingredientRepository.findFirstByIngredientName(ingredientVo.getIngredientName());
-            if (ingredientEntity == null){//
+            if (ingredientEntity == null){
                 ingredientEntity = IngredientDatabaseMapper.fromRecipeIngredientVO(ingredientVo);
             }
 
             ingredientRepository.save(ingredientEntity);
             recipeEntity.getComponentList().add(ingredientEntity);
-            ingredientEntity.setRecipe(recipeEntity);
+            ingredientEntity.getRecipeList().add(recipeEntity);
             for (RecipeMeasurementVO measurementV0: ingredientVo.getMeasurementList()){
                 MeasurementEntity measurementEntity = MeasurementDatabaseMapper.fromRecipeMeasurementVo(measurementV0);
                 measurmentRepository.save(measurementEntity);
@@ -70,6 +70,7 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO {
             }
         }
         //↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+        return true;
     }
 
     @Override

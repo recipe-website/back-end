@@ -20,11 +20,12 @@ public class RecipeEntity {
     private Long id;
     private UUID recipeId;
     private String title;
+    @Column(length = Integer.MAX_VALUE)
     private String description;
     private String canonicalId;
     @ManyToMany
     private List<CreditEnity> creditEnityList;
-
+    @Column(length = Integer.MAX_VALUE)
     private String instruction;
     private String language;
     private Integer numberOfServings;
@@ -33,6 +34,6 @@ public class RecipeEntity {
     private Double totalTimeMinutes;
     @ManyToOne
     private TierEntity tier;
-    @OneToMany
+    @ManyToMany
     private List<IngredientEntity> componentList;
 }
