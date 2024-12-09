@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RecipeRepository extends CrudRepository<RecipeEntity,Long> {
-
-
+    RecipeEntity findFirstByCanonicalId(String canonicalId);
 }

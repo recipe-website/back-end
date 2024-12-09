@@ -1,9 +1,11 @@
 package com.recipe.recipewebsite.core.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.recipe.recipewebsite.core.model.vo.RecipeId;
 import com.recipe.recipewebsite.core.model.vo.RecipeIngredientVO;
 import com.recipe.recipewebsite.core.model.vo.RecipeMeasurementVO;
 import com.recipe.recipewebsite.core.model.vo.RecipeNutritionVO;
+import com.recipe.recipewebsite.core.service.dto.IngredientInitialDTO;
 import com.recipe.recipewebsite.core.service.dto.RecipeInitialDTO;
 import com.recipe.recipewebsite.infrastructure.tastyAPI.response.dto.*;
 import lombok.Getter;
@@ -39,6 +41,7 @@ public class Recipe {
                    List<String> instructionList, String language, Integer numberOfServings,
                    RecipeNutritionVO nutrition, Double totalTimeMinutes, String displayTier, String tier,
                    List<RecipeIngredientVO> componentList) {
+        this.recipeId =new RecipeId(UUID.randomUUID());//nie jestem pewien czy to tu powinno być
         this.title = title;
         this.description = description;
         this.canonicalId = canonicalId;
@@ -112,7 +115,33 @@ public class Recipe {
 
 
     public static Recipe fromInitialDTO(RecipeInitialDTO recipeInitialDTO){
-        return new Recipe(recipeInitialDTO.name(), recipeInitialDTO.description());
+        ObjectMapper mapper = new ObjectMapper();
+        return new Recipe(
+                recipeInitialDTO.titile(),
+                recipeInitialDTO.description(),
+                recipeInitialDTO.canonicalId(),
+                recipeInitialDTO.creditList(),
+                recipeInitialDTO.instructionList(),
+                recipeInitialDTO.language(),
+                recipeInitialDTO.numberOfServings(),
+                mapper.convertValue(recipeInitialDTO.nutrition(),RecipeNutritionVO.class),//TODO("to wywala napraw")
+                recipeInitialDTO.totalTimeMinutes(),
+                recipeInitialDTO.displayTier(),
+                recipeInitialDTO.tier(),
+                recipeInitialDTO.componentList()
+                        .stream()
+                        .map(component -> new RecipeIngredientVO(
+                                component.ingredientName(),
+                                component.measurementList()
+                                        .stream()
+                                        .map( measurement -> new RecipeMeasurementVO(
+                                                measurement.quantity(),
+                                                measurement.unitName(),
+                                                measurement.unitSystem()
+                                        )).toList(),
+                                component.rawText()
+                        )).toList()
+        );
     }
 
     public RecipeSnapshot toSnapshot(){

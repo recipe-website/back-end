@@ -2,8 +2,10 @@ package com.recipe.recipewebsite.core.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class RecipeNutritionVO {
     private Integer calories;

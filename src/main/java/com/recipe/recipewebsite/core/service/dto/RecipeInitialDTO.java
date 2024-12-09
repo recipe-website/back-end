@@ -1,4 +1,18 @@
 package com.recipe.recipewebsite.core.service.dto;
+import com.recipe.recipewebsite.core.model.vo.RecipeIngredientVO;
 
-public record RecipeInitialDTO(String name, String description) {
-}
+import java.util.List;
+public record RecipeInitialDTO(
+        String titile,
+        String description,
+        String canonicalId,
+        List<String> creditList,
+        List<String> instructionList,
+        String language,
+        Integer numberOfServings,
+        NutritionInitialDTO nutrition,
+        Double totalTimeMinutes,
+        String displayTier,
+        String tier,
+        List<IngredientInitialDTO> componentList// zamienic
+) { }

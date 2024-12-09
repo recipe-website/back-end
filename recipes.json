@@ -1,225 +1,159 @@
-{
-  "results": [
-    {
-      "canonical_id": "recipe:4704",
-      "credits": [
-        {
-          "name": "Isabel Castillo"
-        },
-        {
-          "name": "Karlee Rotoly"
-        }
-      ],
-      "description": "This chicken salad is a lunchtime delight! Packed with creamy avocado, tender chicken, and crunchy veggies, it's a healthy and satisfying meal that won't weigh you down. Tossed in a tangy yogurt dressing with a hint of spice, it's a flavor explosion that's perfect for a light meal.",
-      "instructions": [
-        {
-          "display_text": "In a blender or food processor, combine the yogurt, lime juice, pepper, and chili powder and pulse to combine. Add \u00bd of the avocado and blend until creamy."
-        },
-        {
-          "display_text": "In a medium bowl, combine the chicken, yogurt sauce, celery, the remaining \u00bd avocado, onion, and salt. Mix until well combined."
-        },
-        {
-          "display_text": "Serve on low-carb bread and garnish with cilantro, or as desired."
-        },
-        {
-          "display_text": "Enjoy!"
-        }
-      ],
-      "language": "eng",
-      "name": "Low-Carb Avocado Chicken Salad",
-      "num_servings": 4,
-      "nutrition": {
-        "calories": 249,
-        "carbohydrates": 13,
-        "fat": 8,
-        "fiber": 3,
-        "protein": 29,
-        "sugar": 8
+[
+  {
+    "recipeId": null,
+    "title": "Low-Carb Avocado Chicken Salad",
+    "description": "This chicken salad is a lunchtime delight! Packed with creamy avocado, tender chicken, and crunchy veggies, it's a healthy and satisfying meal that won't weigh you down. Tossed in a tangy yogurt dressing with a hint of spice, it's a flavor explosion that's perfect for a light meal.",
+    "canonicalId": "recipe:4704",
+    "creditList": [
+      "Isabel Castillo",
+      "Karlee Rotoly"
+    ],
+    "instructionList": [
+      "In a blender or food processor, combine the yogurt, lime juice, pepper, and chili powder and pulse to combine. Add ½ of the avocado and blend until creamy.",
+      "In a medium bowl, combine the chicken, yogurt sauce, celery, the remaining ½ avocado, onion, and salt. Mix until well combined.",
+      "Serve on low-carb bread and garnish with cilantro, or as desired.",
+      "Enjoy!"
+    ],
+    "language": "eng",
+    "numberOfServings": 4,
+    "nutrition": {
+      "calories": 249,
+      "carbohydrates": 13,
+      "fat": 8,
+      "fiber": 3,
+      "protein": 29,
+      "sugar": 8
+    },
+    "totalTimeMinutes": 15,
+    "displayTier": "Under 15 minutes",
+    "tier": "under_15_minutes",
+    "componentList": [
+      {
+        "ingredientName": "plain greek yogurt",
+        "measurementList": [
+          {
+            "quantity": "⅔",
+            "unitName": "cup",
+            "unitSystem": "imperial"
+          },
+          {
+            "quantity": "190",
+            "unitName": "gram",
+            "unitSystem": "metric"
+          }
+        ],
+        "rawText": "⅔ cup plain Greek yogurt"
       },
-      "sections": [
-        {
-          "components":   [
-            {
-              "ingredient": {
-                "name": "plain greek yogurt"
-              },
-              "measurements": [
-                {
-                  "quantity": "\u2154",
-                  "unit": {
-                    "name": "cup",
-                    "system": "imperial"
-                  }
-                },
-                {
-                  "quantity": "190",
-                  "unit": {
-                    "name": "gram",
-                    "system": "metric"
-                  }
-                }
-              ],
-              "raw_text": " plain Greek yogurt"
-            },
-            {
-              "ingredient": {
-                "name": "lime juice"
-              },
-              "measurements": [
-                {
-                  "quantity": "1",
-                  "unit": {
-                    "name": "tablespoon",
-                    "system": "imperial"
-                  }
-                }
-              ],
-              "raw_text": "1 tablespoon lime juice"
-            },
-            {
-              "ingredient": {
-                "name": "pepper"
-              },
-              "measurements": [
-                {
-                  "quantity": "",
-                  "unit": {
-                    "name": "",
-                    "system": "none"
-                  }
-                }
-              ],
-              "raw_text": "Pepper, to taste"
-            },
-            {
-              "ingredient": {
-                "name": "chili powder"
-              },
-              "measurements": [
-                {
-                  "quantity": "\u215b",
-                  "unit": {
-                    "name": "teaspoon",
-                    "system": "imperial"
-                  }
-                }
-              ],
-              "raw_text": "\u215b teaspoon chili powder"
-            },
-            {
-              "ingredient": {
-                "name": "avocado"
-              },
-              "measurements": [
-                {
-                  "quantity": "1",
-                  "unit": {
-                    "name": "",
-                    "system": "none"
-                  }
-                }
-              ],
-              "raw_text": "1 avocado, cubed, divided"
-            },
-            {
-              "ingredient": {
-                "name": "chicken breast"
-              },
-              "measurements": [
-                {
-                  "quantity": "2",
-                  "unit": {
-                    "name": "",
-                    "system": "none"
-                  }
-                }
-              ],
-              "raw_text": "2 chicken breasts, cooked and shredded"
-            },
-            {
-              "ingredient": {
-                "name": "celery"
-              },
-              "measurements": [
-                {
-                  "quantity": "1",
-                  "unit": {
-                    "name": "stalk",
-                    "system": "none"
-                  }
-                }
-              ],
-              "raw_text": "1 celery stalk, diced"
-            },
-            {
-              "ingredient": {
-                "name": "diced red onion"
-              },
-              "measurements": [
-                {
-                  "quantity": "2",
-                  "unit": {
-                    "name": "tablespoon",
-                    "system": "imperial"
-                  }
-                }
-              ],
-              "raw_text": "2 tablespoons diced red onion"
-            },
-            {
-              "ingredient": {
-                "name": "kosher salt"
-              },
-              "measurements": [
-                {
-                  "quantity": "0",
-                  "unit": {
-                    "name": "",
-                    "system": "none"
-                  }
-                }
-              ],
-              "raw_text": "Kosher salt, to taste"
-            },
-            {
-              "ingredient": {
-                "name": "low-carb bread"
-              },
-              "measurements": [
-                {
-                  "quantity": "0",
-                  "unit": {
-                    "name": "",
-                    "system": "none"
-                  }
-                }
-              ],
-              "raw_text": "Low-carb bread, for serving, optional"
-            },
-            {
-              "ingredient": {
-                "name": "fresh cilantro leaves"
-              },
-              "measurements": [
-                {
-                  "quantity": "0",
-                  "unit": {
-                    "name": "",
-                    "system": "none"
-                  }
-                }
-              ],
-              "raw_text": "Fresh cilantro leaves, for garnish"
-            }
-          ]
-        }
-      ],
-
-      "total_time_minutes": 15,
-      "total_time_tier": {
-        "display_tier": "Under 15 minutes",
-        "tier": "under_15_minutes"
+      {
+        "ingredientName": "lime juice",
+        "measurementList": [
+          {
+            "quantity": "1",
+            "unitName": "tablespoon",
+            "unitSystem": "imperial"
+          }
+        ],
+        "rawText": "1 tablespoon lime juice"
+      },
+      {
+        "ingredientName": "pepper",
+        "measurementList": [
+          {
+            "quantity": "0",
+            "unitName": "",
+            "unitSystem": "none"
+          }
+        ],
+        "rawText": "Pepper, to taste"
+      },
+      {
+        "ingredientName": "chili powder",
+        "measurementList": [
+          {
+            "quantity": "⅛",
+            "unitName": "teaspoon",
+            "unitSystem": "imperial"
+          }
+        ],
+        "rawText": "⅛ teaspoon chili powder"
+      },
+      {
+        "ingredientName": "avocado",
+        "measurementList": [
+          {
+            "quantity": "1",
+            "unitName": "",
+            "unitSystem": "none"
+          }
+        ],
+        "rawText": "1 avocado, cubed, divided"
+      },
+      {
+        "ingredientName": "chicken breast",
+        "measurementList": [
+          {
+            "quantity": "2",
+            "unitName": "",
+            "unitSystem": "none"
+          }
+        ],
+        "rawText": "2 chicken breasts, cooked and shredded"
+      },
+      {
+        "ingredientName": "celery",
+        "measurementList": [
+          {
+            "quantity": "1",
+            "unitName": "stalk",
+            "unitSystem": "none"
+          }
+        ],
+        "rawText": "1 celery stalk, diced"
+      },
+      {
+        "ingredientName": "diced red onion",
+        "measurementList": [
+          {
+            "quantity": "2",
+            "unitName": "tablespoon",
+            "unitSystem": "imperial"
+          }
+        ],
+        "rawText": "2 tablespoons diced red onion"
+      },
+      {
+        "ingredientName": "kosher salt",
+        "measurementList": [
+          {
+            "quantity": "0",
+            "unitName": "",
+            "unitSystem": "none"
+          }
+        ],
+        "rawText": "Kosher salt, to taste"
+      },
+      {
+        "ingredientName": "low-carb bread",
+        "measurementList": [
+          {
+            "quantity": "0",
+            "unitName": "",
+            "unitSystem": "none"
+          }
+        ],
+        "rawText": "Low-carb bread, for serving, optional"
+      },
+      {
+        "ingredientName": "fresh cilantro leaves",
+        "measurementList": [
+          {
+            "quantity": "0",
+            "unitName": "",
+            "unitSystem": "none"
+          }
+        ],
+        "rawText": "Fresh cilantro leaves, for garnish"
       }
-    }
-  ]
-}
+    ]
+  }
+]
