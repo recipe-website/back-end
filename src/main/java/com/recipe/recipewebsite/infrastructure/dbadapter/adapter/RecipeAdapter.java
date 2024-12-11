@@ -1,5 +1,6 @@
 package com.recipe.recipewebsite.infrastructure.dbadapter.adapter;
 
+import com.recipe.recipewebsite.core.model.Recipe;
 import com.recipe.recipewebsite.core.model.RecipeSnapshot;
 import com.recipe.recipewebsite.core.model.vo.RecipeIngredientVO;
 import com.recipe.recipewebsite.core.model.vo.RecipeMeasurementVO;
@@ -11,7 +12,6 @@ import com.recipe.recipewebsite.infrastructure.dbadapter.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -45,7 +45,7 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO {
             recipeEntity.getCreditEnityList().add(creditEnity);
             creditEnity.getRecipeList().add(recipeEntity);
         }
-        TierEntity tierEntity = tierRepository.findFirstByTier(recipeSnapshot.getTier());
+        TierEntity tierEntity = tierRepository.findFirstByTier(recipeSnapshot.getTier().getTier());
         if (tierEntity == null){
             tierEntity = TierDatabaseMapper.fromRecipeSnapshot(recipeSnapshot);
         }
@@ -75,8 +75,11 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO {
 
     @Override
     public List<RecipeSnapshot> getAllRecipe() {
-        List<RecipeSnapshot> recipes = new ArrayList<>();
-        recipeRepository.findAll().forEach((enity)->recipes.add(RecipeDatabaseMapper.toSnapshot(enity)));
-        return recipes;
+        List<RecipeEntity> recipes = recipeRepository.findAll();
+        return recipes.stream()
+                .map(RecipeDatabaseMapper::fromEntity)
+                .map(Recipe::fromSelectDTO)
+                .map(Recipe::toSnapshot)
+                .toList();
     }
 }

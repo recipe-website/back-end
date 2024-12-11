@@ -3,11 +3,10 @@ package com.recipe.recipewebsite.core.model;
 import com.recipe.recipewebsite.core.model.vo.RecipeId;
 import com.recipe.recipewebsite.core.model.vo.RecipeIngredientVO;
 import com.recipe.recipewebsite.core.model.vo.RecipeNutritionVO;
-import lombok.AllArgsConstructor;
+import com.recipe.recipewebsite.core.model.vo.RecipeTierVO;
 import lombok.Getter;
-
-import java.util.ArrayList;
 import java.util.List;
+
 @Getter
 public class RecipeSnapshot {
     private final RecipeId recipeId;
@@ -20,8 +19,7 @@ public class RecipeSnapshot {
     private final Integer numberOfServings;
     private final RecipeNutritionVO nutrition;
     private final Double totalTimeMinutes;
-    private final String displayTier;
-    private final String tier;
+    private final RecipeTierVO tier;
     private final List<RecipeIngredientVO> componentList;
 
     public RecipeSnapshot(Recipe recipe) {
@@ -35,7 +33,6 @@ public class RecipeSnapshot {
         this.numberOfServings = recipe.getNumberOfServings();
         this.nutrition = recipe.getNutrition();
         this.totalTimeMinutes = recipe.getTotalTimeMinutes();
-        this.displayTier = recipe.getDisplayTier();
         this.tier = recipe.getTier();
         this.componentList = recipe.getComponentList();
     }

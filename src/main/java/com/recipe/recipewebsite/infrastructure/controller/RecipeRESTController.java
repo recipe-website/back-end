@@ -1,12 +1,10 @@
 package com.recipe.recipewebsite.infrastructure.controller;
 
 import com.recipe.recipewebsite.core.model.RecipeSnapshot;
-import com.recipe.recipewebsite.core.service.CreateRecipeUseCase;
-import com.recipe.recipewebsite.core.service.GetAllRecipesFromDBUseCase;
-import com.recipe.recipewebsite.core.service.GetAllRecipesUseCase;
-import com.recipe.recipewebsite.core.service.UpdateDatabseUseCase;
+import com.recipe.recipewebsite.core.model.vo.RecipeIngredientVO;
+import com.recipe.recipewebsite.core.model.vo.RecipeTierVO;
+import com.recipe.recipewebsite.core.service.*;
 import com.recipe.recipewebsite.core.service.dto.RecipeInitialDTO;
-import com.recipe.recipewebsite.infrastructure.dbadapter.model.RecipeEntity;
 import com.recipe.recipewebsite.infrastructure.tastyAPI.response.dto.RecipeListResponseDTO;
 import com.recipe.recipewebsite.infrastructure.tastyAPI.response.dto.RecipeListResult;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +18,15 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/recipe")
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin("{http://localhost:5173, http://localhost:5174}")
 public class RecipeRESTController {
     private final CreateRecipeUseCase createRecipeUseCase;
     private final GetAllRecipesUseCase getAllRecipesUseCase;
     private final GetAllRecipesFromDBUseCase getAllRecipesFromDBUseCase;
     private final UpdateDatabseUseCase updateDatabseUseCase;
+    private final GetAllIngredientsUseCase getAllIngredientsUseCase;
+    private final GetAllTiersUseCase getAllTiersUseCase;
+
     @PostMapping(value = "/create")
     public ResponseEntity<UUID> createRecipe(@RequestBody RecipeInitialDTO recipeInitialDTO) {
         return new ResponseEntity<>(createRecipeUseCase.createRecipe(recipeInitialDTO), HttpStatus.CREATED);
@@ -48,4 +49,15 @@ public class RecipeRESTController {
     public ResponseEntity<List<RecipeSnapshot>> getAllRecipesFromDB() {
         return new ResponseEntity<>(getAllRecipesFromDBUseCase.getAllRecipesFromDB(), HttpStatus.OK);
     }
+
+    @GetMapping(value = "allIngredients")
+    public  ResponseEntity<List<RecipeIngredientVO>> getAllIngredients() {
+        return new ResponseEntity<>(getAllIngredientsUseCase.getAllIngredients(),HttpStatus.OK);
+    }
+
+    @GetMapping(value = "allTiers")
+    public  ResponseEntity<List<RecipeTierVO>> getAllTiers() {
+        return new ResponseEntity<>(getAllTiersUseCase.getAllTiers(),HttpStatus.OK);
+    }
+
 }

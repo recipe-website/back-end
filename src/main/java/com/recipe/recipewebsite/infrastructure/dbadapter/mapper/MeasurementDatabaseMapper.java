@@ -13,4 +13,12 @@ public class MeasurementDatabaseMapper {
                 null
         );
     }
+
+    public static RecipeMeasurementVO fromMeasurementEntity (MeasurementEntity measurementEntity){
+        return new RecipeMeasurementVO(
+                measurementEntity.getQuantity(),
+                measurementEntity.getUnitName(),
+                measurementEntity.getUnitSystem()
+        );
+    }
 }

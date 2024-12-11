@@ -1,12 +1,11 @@
 package com.recipe.recipewebsite.core.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.recipe.recipewebsite.core.model.vo.RecipeId;
-import com.recipe.recipewebsite.core.model.vo.RecipeIngredientVO;
-import com.recipe.recipewebsite.core.model.vo.RecipeMeasurementVO;
-import com.recipe.recipewebsite.core.model.vo.RecipeNutritionVO;
-import com.recipe.recipewebsite.core.service.dto.IngredientInitialDTO;
+
+import com.recipe.recipewebsite.core.model.vo.*;
 import com.recipe.recipewebsite.core.service.dto.RecipeInitialDTO;
+import com.recipe.recipewebsite.core.service.dto.RecipeSelectDTO;
+import com.recipe.recipewebsite.infrastructure.dbadapter.mapper.IngredientDatabaseMapper;
+import com.recipe.recipewebsite.infrastructure.dbadapter.mapper.TierDatabaseMapper;
 import com.recipe.recipewebsite.infrastructure.tastyAPI.response.dto.*;
 import lombok.Getter;
 
@@ -15,31 +14,42 @@ import java.util.List;
 import java.util.UUID;
 @Getter
 public class Recipe {
-    private RecipeId recipeId;
-    private String title;
-    private String description;
-    private String canonicalId;
-    private List<String> creditList;
-    private List<String> instructionList;
-    private String language;
-    private Integer numberOfServings;
-    private RecipeNutritionVO nutrition;
-    private Double totalTimeMinutes;
-    private String displayTier;
-    private String tier;
-    private List<RecipeIngredientVO> componentList;
+    private final RecipeId recipeId;
+    private final String title;
+    private final String description;
+    private final String canonicalId;
+    private final List<String> creditList;
+    private final List<String> instructionList;
+    private final String language;
+    private final Integer numberOfServings;
+    private final RecipeNutritionVO nutrition;
+    private final Double totalTimeMinutes;
+    private final RecipeTierVO tier;
+    private final List<RecipeIngredientVO> componentList;
 
 
 
-    private Recipe(String title, String description) {
-        this.recipeId = new RecipeId(UUID.randomUUID());
+    private Recipe(RecipeId recipeId, String title, String description, String canonicalId, List<String> creditList,
+                   List<String> instructionList, String language, Integer numberOfServings,
+                   RecipeNutritionVO nutrition, Double totalTimeMinutes, RecipeTierVO tier,
+                   List<RecipeIngredientVO> componentList) {
+        this.recipeId = recipeId;
         this.title = title;
         this.description = description;
+        this.canonicalId = canonicalId;
+        this.creditList = creditList;
+        this.instructionList = instructionList;
+        this.language = language;
+        this.numberOfServings = numberOfServings;
+        this.nutrition = nutrition;
+        this.totalTimeMinutes = totalTimeMinutes;
+        this.tier = tier;
+        this.componentList = componentList;
     }
 
     private Recipe(String title, String description, String canonicalId, List<String> creditList,
                    List<String> instructionList, String language, Integer numberOfServings,
-                   RecipeNutritionVO nutrition, Double totalTimeMinutes, String displayTier, String tier,
+                   RecipeNutritionVO nutrition, Double totalTimeMinutes, RecipeTierVO tier,
                    List<RecipeIngredientVO> componentList) {
         this.recipeId =new RecipeId(UUID.randomUUID());//nie jestem pewien czy to tu powinno być
         this.title = title;
@@ -51,7 +61,6 @@ public class Recipe {
         this.numberOfServings = numberOfServings;
         this.nutrition = nutrition;
         this.totalTimeMinutes = totalTimeMinutes;
-        this.displayTier = displayTier;
         this.tier = tier;
         this.componentList = componentList;
     }
@@ -107,15 +116,14 @@ public class Recipe {
                         recipeListResult.getNutrition().getSugar()
                 ),
                 recipeListResult.getTotal_time_minutes(),
-                recipeListResult.getTotal_time_tier().getDisplay_tier(),
-                recipeListResult.getTotal_time_tier().getTier(),
+                new RecipeTierVO( recipeListResult.getTotal_time_tier().getTier(),
+                recipeListResult.getTotal_time_tier().getDisplay_tier()),
                 componentsList
         );
     }
 
 
     public static Recipe fromInitialDTO(RecipeInitialDTO recipeInitialDTO){
-        ObjectMapper mapper = new ObjectMapper();
         return new Recipe(
                 recipeInitialDTO.titile(),
                 recipeInitialDTO.description(),
@@ -124,10 +132,16 @@ public class Recipe {
                 recipeInitialDTO.instructionList(),
                 recipeInitialDTO.language(),
                 recipeInitialDTO.numberOfServings(),
-                mapper.convertValue(recipeInitialDTO.nutrition(),RecipeNutritionVO.class),//TODO("to wywala napraw")
+                new RecipeNutritionVO(
+                        recipeInitialDTO.nutrition().calories(),
+                        recipeInitialDTO.nutrition().carbohydrates(),
+                        recipeInitialDTO.nutrition().fat(),
+                        recipeInitialDTO.nutrition().fiber(),
+                        recipeInitialDTO.nutrition().protein(),
+                        recipeInitialDTO.nutrition().sugar()
+                ),
                 recipeInitialDTO.totalTimeMinutes(),
-                recipeInitialDTO.displayTier(),
-                recipeInitialDTO.tier(),
+                new RecipeTierVO(recipeInitialDTO.tier(),recipeInitialDTO.displayTier()),
                 recipeInitialDTO.componentList()
                         .stream()
                         .map(component -> new RecipeIngredientVO(
@@ -141,6 +155,30 @@ public class Recipe {
                                         )).toList(),
                                 component.rawText()
                         )).toList()
+        );
+    }
+
+    public static Recipe fromSelectDTO(RecipeSelectDTO recipeSelectDTO){
+        return new Recipe(
+                new RecipeId(recipeSelectDTO.recipeId()),
+                recipeSelectDTO.title(),
+                recipeSelectDTO.description(),
+                recipeSelectDTO.canonicalId(),
+                null, //todo: poprawic
+                List.of(recipeSelectDTO.instruction()),
+                recipeSelectDTO.language(),
+                recipeSelectDTO.numberOfServings(),
+                new RecipeNutritionVO(
+                        recipeSelectDTO.nutrition().getCalories(),
+                        recipeSelectDTO.nutrition().getCarbohydrates(),
+                        recipeSelectDTO.nutrition().getFat(),
+                        recipeSelectDTO.nutrition().getFiber(),
+                        recipeSelectDTO.nutrition().getProtein(),
+                        recipeSelectDTO.nutrition().getSugar()
+                ),
+                recipeSelectDTO.totalTimeMinutes(),
+                TierDatabaseMapper.fromTierEntity(recipeSelectDTO.tier()),
+                recipeSelectDTO.componentList().stream().map(IngredientDatabaseMapper::fromIngredientEntity).toList()
         );
     }
 

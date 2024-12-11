@@ -16,4 +16,12 @@ public class IngredientDatabaseMapper {
                 new ArrayList<>()
         );
     }
+    public static RecipeIngredientVO fromIngredientEntity(IngredientEntity ingredientEntity){
+        return new RecipeIngredientVO(
+                ingredientEntity.getIngredientName(),
+                ingredientEntity.getMeasurementEntityList().stream()
+                        .map(MeasurementDatabaseMapper::fromMeasurementEntity).toList(),
+                ingredientEntity.getRawText()
+        );
+    }
 }

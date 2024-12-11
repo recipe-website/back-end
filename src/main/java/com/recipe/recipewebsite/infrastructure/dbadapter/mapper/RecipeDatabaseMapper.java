@@ -2,10 +2,9 @@ package com.recipe.recipewebsite.infrastructure.dbadapter.mapper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.recipe.recipewebsite.core.model.RecipeSnapshot;
-import com.recipe.recipewebsite.core.model.vo.RecipeId;
+import com.recipe.recipewebsite.core.service.dto.RecipeSelectDTO;
 import com.recipe.recipewebsite.infrastructure.dbadapter.model.NutritionEmbedded;
 import com.recipe.recipewebsite.infrastructure.dbadapter.model.RecipeEntity;
-import com.recipe.recipewebsite.infrastructure.dbadapter.repository.CreditRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,12 +38,20 @@ public class RecipeDatabaseMapper {
         );
     }
 
-    public static RecipeSnapshot toSnapshot(RecipeEntity entity){
-//        return new RecipeSnapshot(
-//                new RecipeId(entity.getRecipeId()),
-//                entity.getTitle(),
-//                entity.getDescription()
-//        );
-        return  null;
+    public static RecipeSelectDTO fromEntity(RecipeEntity entity){
+        return new RecipeSelectDTO(
+                entity.getRecipeId(),
+                entity.getTitle(),
+                entity.getDescription(),
+                entity.getCanonicalId(),
+                entity.getCreditEnityList(),
+                entity.getInstruction(),
+                entity.getLanguage(),
+                entity.getNumberOfServings(),
+                entity.getNutrition(),
+                entity.getTotalTimeMinutes(),
+                entity.getTier(),
+                entity.getComponentList()
+        );
     }
 }
