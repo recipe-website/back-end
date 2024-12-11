@@ -96,7 +96,10 @@ public class Recipe {
                         .toList();
                     componentsList.addAll(components);
                 });
-
+                //sprawdzanie czy tier jest nullem ponieważ APi response zawiera czasmi null total_time_tier i wtedy wyrzuca cały program
+                if (recipeListResult.getTotal_time_tier() == null){
+                    recipeListResult.setTotal_time_tier(new RecipeTimeTier("0","0"));
+                }
 
 
         return new Recipe(
