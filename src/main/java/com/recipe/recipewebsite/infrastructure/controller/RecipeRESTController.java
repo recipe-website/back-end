@@ -49,6 +49,11 @@ public class RecipeRESTController {
     public ResponseEntity<List<RecipeSnapshot>> getAllRecipesFromDB() {
         return new ResponseEntity<>(getAllRecipesFromDBUseCase.getAllRecipesFromDB(), HttpStatus.OK);
     }
+    @GetMapping(value = "allRecipesFromDB/{list}")
+    public ResponseEntity<List<RecipeSnapshot>> getAllRecipesFromDBWithFilters(@PathVariable(value = "list",required = false)List<String> ingredientsNameList) {
+        System.out.println(ingredientsNameList);
+        return new ResponseEntity<>(getAllRecipesFromDBUseCase.getAllRecipesFromDBWithFilter(ingredientsNameList), HttpStatus.OK);
+    }
 
     @GetMapping(value = "allIngredients")
     public  ResponseEntity<List<RecipeIngredientVO>> getAllIngredients() {

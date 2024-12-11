@@ -12,6 +12,7 @@ import com.recipe.recipewebsite.infrastructure.dbadapter.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,14 +54,11 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO {
         recipeEntity.setTier(tierEntity);
         tierEntity.getRecipeList().add(recipeEntity);
         for (RecipeIngredientVO ingredientVo : recipeSnapshot.getComponentList()){
-            IngredientEntity ingredientEntity = ingredientRepository.findFirstByIngredientName(ingredientVo.getIngredientName());
-            if (ingredientEntity == null){
-                ingredientEntity = IngredientDatabaseMapper.fromRecipeIngredientVO(ingredientVo);
-            }
+            IngredientEntity ingredientEntity = IngredientDatabaseMapper.fromRecipeIngredientVO(ingredientVo);
 
             ingredientRepository.save(ingredientEntity);
             recipeEntity.getComponentList().add(ingredientEntity);
-            ingredientEntity.getRecipeList().add(recipeEntity);
+            ingredientEntity.setRecipeList(recipeEntity);
             for (RecipeMeasurementVO measurementV0: ingredientVo.getMeasurementList()){
                 MeasurementEntity measurementEntity = MeasurementDatabaseMapper.fromRecipeMeasurementVo(measurementV0);
                 measurmentRepository.save(measurementEntity);
@@ -77,6 +75,26 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO {
     public List<RecipeSnapshot> getAllRecipe() {
         List<RecipeEntity> recipes = recipeRepository.findAll();
         return recipes.stream()
+                .map(RecipeDatabaseMapper::fromEntity)
+                .map(Recipe::fromSelectDTO)
+                .map(Recipe::toSnapshot)
+                .toList();
+    }
+
+    @Override
+    public List<RecipeSnapshot> getAllRecipesFromDBWithFilter(List<String> ingredientsFilter) {
+        //pewnie da się zrobić to selectem ale mam dość timestamp 5:53
+        List<RecipeEntity> recipeEntities = recipeRepository.findAll();
+        List<RecipeEntity> recipeEntitiesresult = new ArrayList<>();
+        for (RecipeEntity recipeEntity : recipeEntities){
+            for(IngredientEntity ingredientEntity: recipeEntity.getComponentList()){
+                if (ingredientsFilter.contains(ingredientEntity.getIngredientName())){
+                    recipeEntitiesresult.add(recipeEntity);
+                    break;
+                }
+            }
+        }
+        return recipeEntitiesresult.stream()
                 .map(RecipeDatabaseMapper::fromEntity)
                 .map(Recipe::fromSelectDTO)
                 .map(Recipe::toSnapshot)

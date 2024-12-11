@@ -34,6 +34,6 @@ public class RecipeEntity {
     private Double totalTimeMinutes;
     @ManyToOne
     private TierEntity tier;
-    @ManyToMany
+    @OneToMany
     private List<IngredientEntity> componentList;
 }

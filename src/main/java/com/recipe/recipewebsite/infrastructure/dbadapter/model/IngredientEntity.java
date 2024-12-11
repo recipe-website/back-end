@@ -20,6 +20,6 @@ public class IngredientEntity {
     @OneToMany
     private List<MeasurementEntity> measurementEntityList;
     private String rawText;
-    @ManyToMany
-    private List<RecipeEntity> recipeList;
+    @ManyToOne()
+    private RecipeEntity recipeList;
 }

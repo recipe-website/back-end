@@ -9,8 +9,6 @@ import java.util.List;
 
 @Repository
 public interface IngredientRepository extends CrudRepository<IngredientEntity,Long> {
-    IngredientEntity findFirstByIngredientName(String ingredientName);
-
     @NonNull
     List<IngredientEntity> findAll();
 }
