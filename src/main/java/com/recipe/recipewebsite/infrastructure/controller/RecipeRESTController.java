@@ -26,6 +26,7 @@ public class RecipeRESTController {
     private final UpdateDatabseUseCase updateDatabseUseCase;
     private final GetAllIngredientsUseCase getAllIngredientsUseCase;
     private final GetAllTiersUseCase getAllTiersUseCase;
+    private final GetRecipeUseCase getRecipeUseCase;
 
     @PostMapping(value = "/create")
     public ResponseEntity<UUID> createRecipe(@RequestBody RecipeInitialDTO recipeInitialDTO) {
@@ -63,6 +64,13 @@ public class RecipeRESTController {
     @GetMapping(value = "allTiers")
     public  ResponseEntity<List<RecipeTierVO>> getAllTiers() {
         return new ResponseEntity<>(getAllTiersUseCase.getAllTiers(),HttpStatus.OK);
+    }
+
+    @GetMapping(value = "recipebyId/{id}")
+    public ResponseEntity<RecipeSnapshot> getRecipe(@PathVariable(value= "id") String id) {
+        System.out.println(id);
+        UUID uuid = UUID.fromString(id);
+        return new ResponseEntity<>(getRecipeUseCase.getRecipe(uuid),HttpStatus.OK);
     }
 
 }

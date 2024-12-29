@@ -6,6 +6,7 @@ import com.recipe.recipewebsite.core.model.vo.RecipeIngredientVO;
 import com.recipe.recipewebsite.core.model.vo.RecipeMeasurementVO;
 import com.recipe.recipewebsite.core.service.ports.out.CreateRecipeDAO;
 import com.recipe.recipewebsite.core.service.ports.out.GetAllRecipeDAO;
+import com.recipe.recipewebsite.core.service.ports.out.GetRecipeDAO;
 import com.recipe.recipewebsite.infrastructure.dbadapter.mapper.*;
 import com.recipe.recipewebsite.infrastructure.dbadapter.model.*;
 import com.recipe.recipewebsite.infrastructure.dbadapter.repository.*;
@@ -14,10 +15,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO {
+public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO, GetRecipeDAO {
 
     private final RecipeRepository recipeRepository;
     private final CreditRepository creditRepository;
@@ -79,6 +81,17 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO {
                 .map(Recipe::fromSelectDTO)
                 .map(Recipe::toSnapshot)
                 .toList();
+    }
+    @Override
+    public RecipeSnapshot getRecipe(UUID id) {
+        RecipeEntity recipe = recipeRepository.findFirstByRecipeId(id);
+        return new RecipeSnapshot(
+                Recipe.fromSelectDTO(
+                        RecipeDatabaseMapper.fromEntity(recipe)
+                )
+        );
+
+
     }
 
     @Override
