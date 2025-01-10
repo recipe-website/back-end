@@ -1,6 +1,7 @@
 package com.recipe.recipewebsite.core.service;
 
 import com.recipe.recipewebsite.core.model.RecipeSnapshot;
+import com.recipe.recipewebsite.core.service.dto.FiltersDTO;
 import com.recipe.recipewebsite.core.service.ports.out.GetAllRecipeDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,7 @@ public class GetAllRecipesFromDBUseCase {
     public List<RecipeSnapshot> getAllRecipesFromDB(){
         return  getAllRecipeDAO.getAllRecipe();
     }
-    public List<RecipeSnapshot> getAllRecipesFromDBWithFilter(List<String> ingredientsFilter){
-
-        return getAllRecipeDAO.getAllRecipesFromDBWithFilter(ingredientsFilter);
+    public List<RecipeSnapshot> getAllRecipesFromDBWithFilter(FiltersDTO filtersDTO){
+        return getAllRecipeDAO.getAllRecipesFromDBWithFilter(filtersDTO);
     }
 }

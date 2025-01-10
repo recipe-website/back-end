@@ -4,6 +4,7 @@ import com.recipe.recipewebsite.core.model.Recipe;
 import com.recipe.recipewebsite.core.model.RecipeSnapshot;
 import com.recipe.recipewebsite.core.model.vo.RecipeIngredientVO;
 import com.recipe.recipewebsite.core.model.vo.RecipeMeasurementVO;
+import com.recipe.recipewebsite.core.service.dto.FiltersDTO;
 import com.recipe.recipewebsite.core.service.ports.out.CreateRecipeDAO;
 import com.recipe.recipewebsite.core.service.ports.out.GetAllRecipeDAO;
 import com.recipe.recipewebsite.core.service.ports.out.GetRecipeDAO;
@@ -95,17 +96,22 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO, GetReci
     }
 
     @Override
-    public List<RecipeSnapshot> getAllRecipesFromDBWithFilter(List<String> ingredientsFilter) {
-        //pewnie da się zrobić to selectem ale mam dość timestamp 5:53
+    public List<RecipeSnapshot> getAllRecipesFromDBWithFilter(FiltersDTO filtersDTO) {
+        System.out.println(filtersDTO);
         List<RecipeEntity> recipeEntities = recipeRepository.findAll();
         List<RecipeEntity> recipeEntitiesresult = new ArrayList<>();
-        for (RecipeEntity recipeEntity : recipeEntities){
-            for(IngredientEntity ingredientEntity: recipeEntity.getComponentList()){
-                if (ingredientsFilter.contains(ingredientEntity.getIngredientName())){
-                    recipeEntitiesresult.add(recipeEntity);
-                    break;
+        if (filtersDTO.getIngredients() != null){//temp
+
+            for (RecipeEntity recipeEntity : recipeEntities){
+                for(IngredientEntity ingredientEntity: recipeEntity.getComponentList()){
+                    if (filtersDTO.getIngredients().contains(ingredientEntity.getIngredientName())){
+                        recipeEntitiesresult.add(recipeEntity);
+                        break;
+                    }
                 }
             }
+        }else{//temp
+            recipeEntitiesresult = recipeEntities;
         }
         return recipeEntitiesresult.stream()
                 .map(RecipeDatabaseMapper::fromEntity)

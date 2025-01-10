@@ -4,6 +4,7 @@ import com.recipe.recipewebsite.core.model.RecipeSnapshot;
 import com.recipe.recipewebsite.core.model.vo.RecipeIngredientVO;
 import com.recipe.recipewebsite.core.model.vo.RecipeTierVO;
 import com.recipe.recipewebsite.core.service.*;
+import com.recipe.recipewebsite.core.service.dto.FiltersDTO;
 import com.recipe.recipewebsite.core.service.dto.RecipeInitialDTO;
 import com.recipe.recipewebsite.infrastructure.tastyAPI.response.dto.RecipeListResponseDTO;
 import com.recipe.recipewebsite.infrastructure.tastyAPI.response.dto.RecipeListResult;
@@ -46,14 +47,30 @@ public class RecipeRESTController {
     public ResponseEntity<List<RecipeSnapshot>> getAllRecipes() {
         return new ResponseEntity<>(getAllRecipesUseCase.getAllRecipes(), HttpStatus.OK);
     }
+//    @GetMapping(value = "allRecipesFromDB")
+//    public ResponseEntity<List<RecipeSnapshot>> getAllRecipesFromDB() {
+//        return new ResponseEntity<>(getAllRecipesFromDBUseCase.getAllRecipesFromDB(), HttpStatus.OK);
+//    }
     @GetMapping(value = "allRecipesFromDB")
-    public ResponseEntity<List<RecipeSnapshot>> getAllRecipesFromDB() {
-        return new ResponseEntity<>(getAllRecipesFromDBUseCase.getAllRecipesFromDB(), HttpStatus.OK);
-    }
-    @GetMapping(value = "allRecipesFromDB/{list}")
-    public ResponseEntity<List<RecipeSnapshot>> getAllRecipesFromDBWithFilters(@PathVariable(value = "list",required = false)List<String> ingredientsNameList) {
-        System.out.println(ingredientsNameList);
-        return new ResponseEntity<>(getAllRecipesFromDBUseCase.getAllRecipesFromDBWithFilter(ingredientsNameList), HttpStatus.OK);
+    public ResponseEntity<List<RecipeSnapshot>> getAllRecipesFromDBWithFilters(
+            @RequestParam(required = false) Integer difficulty,
+            @RequestParam(required = false) Integer minTime,
+            @RequestParam(required = false) Integer maxTime,
+            @RequestParam(required = false) List<String> ingredients
+    ) {
+        FiltersDTO filtersDTO = new FiltersDTO(difficulty, minTime, maxTime, ingredients);
+        System.out.println("FiltersDTO is present:");
+        System.out.println("Difficulty: " + filtersDTO.getDifficulty());
+        System.out.println("Min Time: " + filtersDTO.getMinTime());
+        System.out.println("Max Time: " + filtersDTO.getMaxTime());
+        System.out.println("Ingredients: " + filtersDTO.getIngredients());
+        if ((filtersDTO.getDifficulty() == null || filtersDTO.getDifficulty() == 0) &&
+                (filtersDTO.getMinTime() == null|| filtersDTO.getMinTime() == 0 )&&
+                ( filtersDTO.getMaxTime() == null || filtersDTO.getMaxTime() == 0) &&
+                (filtersDTO.getIngredients() == null || filtersDTO.getIngredients().isEmpty())) {
+            return new ResponseEntity<>(getAllRecipesFromDBUseCase.getAllRecipesFromDB(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(getAllRecipesFromDBUseCase.getAllRecipesFromDBWithFilter(filtersDTO), HttpStatus.OK);
     }
 
     @GetMapping(value = "allIngredients")
