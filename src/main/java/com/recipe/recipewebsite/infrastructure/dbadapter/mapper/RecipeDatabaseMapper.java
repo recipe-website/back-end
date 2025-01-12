@@ -34,7 +34,9 @@ public class RecipeDatabaseMapper {
                 nutrition,
                 snapshot.getTotalTimeMinutes(),
                 null,
-                new ArrayList<>()
+                new ArrayList<>(),
+                snapshot.getThumbnailUrl(),
+                snapshot.getOriginalVideoUrl()
         );
     }
 
@@ -51,7 +53,9 @@ public class RecipeDatabaseMapper {
                 entity.getNutrition(),
                 entity.getTotalTimeMinutes(),
                 entity.getTier(),
-                entity.getComponentList()
+                entity.getComponentList(),
+                entity.getThumbnailUrl(),
+                entity.getOriginalVideoUrl()
         );
     }
 }

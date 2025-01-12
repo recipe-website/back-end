@@ -1,5 +1,4 @@
 package com.recipe.recipewebsite.core.service.dto;
-import com.recipe.recipewebsite.core.model.vo.RecipeIngredientVO;
 
 import java.util.List;
 public record RecipeInitialDTO(
@@ -14,5 +13,7 @@ public record RecipeInitialDTO(
         Double totalTimeMinutes,
         String displayTier,
         String tier,
-        List<IngredientInitialDTO> componentList// zamienic
+        List<IngredientInitialDTO> componentList,// zamienic
+        String thumbnailUrl,
+        String originalVideoUrl
 ) { }

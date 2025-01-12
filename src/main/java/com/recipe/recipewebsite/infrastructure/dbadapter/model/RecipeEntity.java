@@ -36,4 +36,6 @@ public class RecipeEntity {
     private TierEntity tier;
     @OneToMany
     private List<IngredientEntity> componentList;
+    private String thumbnailUrl;
+    private String originalVideoUrl;
 }

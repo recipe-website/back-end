@@ -21,6 +21,8 @@ public class RecipeSnapshot {
     private final Double totalTimeMinutes;
     private final RecipeTierVO tier;
     private final List<RecipeIngredientVO> componentList;
+    private final String thumbnailUrl;
+    private final String originalVideoUrl;
 
     public RecipeSnapshot(Recipe recipe) {
         this.recipeId = recipe.getRecipeId();
@@ -35,5 +37,7 @@ public class RecipeSnapshot {
         this.totalTimeMinutes = recipe.getTotalTimeMinutes();
         this.tier = recipe.getTier();
         this.componentList = recipe.getComponentList();
+        this.thumbnailUrl = recipe.getThumbnailUrl();
+        this.originalVideoUrl = recipe.getOriginalVideoUrl();
     }
 }

@@ -26,13 +26,15 @@ public class Recipe {
     private final Double totalTimeMinutes;
     private final RecipeTierVO tier;
     private final List<RecipeIngredientVO> componentList;
+    private final String thumbnailUrl;
+    private final String originalVideoUrl;
 
 
 
     private Recipe(RecipeId recipeId, String title, String description, String canonicalId, List<String> creditList,
                    List<String> instructionList, String language, Integer numberOfServings,
                    RecipeNutritionVO nutrition, Double totalTimeMinutes, RecipeTierVO tier,
-                   List<RecipeIngredientVO> componentList) {
+                   List<RecipeIngredientVO> componentList, String thumbnailUrl, String originalVideoUrl) {
         this.recipeId = recipeId;
         this.title = title;
         this.description = description;
@@ -45,12 +47,15 @@ public class Recipe {
         this.totalTimeMinutes = totalTimeMinutes;
         this.tier = tier;
         this.componentList = componentList;
+        this.thumbnailUrl = thumbnailUrl;
+        this.originalVideoUrl = originalVideoUrl;
     }
 
     private Recipe(String title, String description, String canonicalId, List<String> creditList,
                    List<String> instructionList, String language, Integer numberOfServings,
                    RecipeNutritionVO nutrition, Double totalTimeMinutes, RecipeTierVO tier,
-                   List<RecipeIngredientVO> componentList) {
+                   List<RecipeIngredientVO> componentList, String thumbnailUrl, String originalVideoUrl) {
+
         this.recipeId =new RecipeId(UUID.randomUUID());//nie jestem pewien czy to tu powinno być
         this.title = title;
         this.description = description;
@@ -63,6 +68,8 @@ public class Recipe {
         this.totalTimeMinutes = totalTimeMinutes;
         this.tier = tier;
         this.componentList = componentList;
+        this.thumbnailUrl = thumbnailUrl;
+        this.originalVideoUrl = originalVideoUrl;
     }
 
     public static Recipe fromRecipeListResult(RecipeListResult recipeListResult) {
@@ -121,7 +128,9 @@ public class Recipe {
                 recipeListResult.getTotal_time_minutes(),
                 new RecipeTierVO( recipeListResult.getTotal_time_tier().getTier(),
                 recipeListResult.getTotal_time_tier().getDisplay_tier()),
-                componentsList
+                componentsList,
+                recipeListResult.getThumbnail_url(),
+                recipeListResult.getOriginal_video_url()
         );
     }
 
@@ -157,7 +166,10 @@ public class Recipe {
                                                 measurement.unitSystem()
                                         )).toList(),
                                 component.rawText()
-                        )).toList()
+                        )).toList(),
+                recipeInitialDTO.thumbnailUrl(),
+                recipeInitialDTO.originalVideoUrl()
+
         );
     }
 
@@ -181,8 +193,10 @@ public class Recipe {
                 ),
                 recipeSelectDTO.totalTimeMinutes(),
                 TierDatabaseMapper.fromTierEntity(recipeSelectDTO.tier()),
-                recipeSelectDTO.componentList().stream().map(IngredientDatabaseMapper::fromIngredientEntity).toList()
-        );
+                recipeSelectDTO.componentList().stream().map(IngredientDatabaseMapper::fromIngredientEntity).toList(),
+                recipeSelectDTO.thumbnailUrl(),
+                recipeSelectDTO.originalVideoUrl()
+                );
     }
 
     public RecipeSnapshot toSnapshot(){

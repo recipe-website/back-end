@@ -19,6 +19,8 @@ public record RecipeSelectDTO(
         NutritionEmbedded nutrition,
         Double totalTimeMinutes,
         TierEntity tier,
-        List<IngredientEntity> componentList
+        List<IngredientEntity> componentList,
+        String thumbnailUrl,
+        String originalVideoUrl
 ) {
 }

@@ -25,4 +25,7 @@ public class RecipeListResult {
     List<RecipeSection> sections;
     Double total_time_minutes;
     RecipeTimeTier total_time_tier;
+    String thumbnail_url;
+    String original_video_url;
+
 }
