@@ -10,7 +10,7 @@ public class IngredientDatabaseMapper {
     public static IngredientEntity fromRecipeIngredientVO(RecipeIngredientVO recipeIngredientVO){
         return new IngredientEntity(
                 null,
-                recipeIngredientVO.getIngredientName(),
+                null,
                 new ArrayList<>(),
                 recipeIngredientVO.getRawText(),
                 null
@@ -18,7 +18,7 @@ public class IngredientDatabaseMapper {
     }
     public static RecipeIngredientVO fromIngredientEntity(IngredientEntity ingredientEntity){
         return new RecipeIngredientVO(
-                ingredientEntity.getIngredientName(),
+                ingredientEntity.getIngredientName(), //Overrided in IngredientEntity
                 ingredientEntity.getMeasurementEntityList().stream()
                         .map(MeasurementDatabaseMapper::fromMeasurementEntity).toList(),
                 ingredientEntity.getRawText()

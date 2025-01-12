@@ -27,7 +27,7 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO, GetReci
     private final IngredientRepository ingredientRepository;
     private final MeasurmentRepository measurmentRepository;
     private final TierRepository tierRepository;
-
+    private final IngredientNameRepository ingredientNameRepository;
     @Override
     public boolean createRecipe(RecipeSnapshot recipeSnapshot) {
 
@@ -56,10 +56,17 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO, GetReci
         tierRepository.save(tierEntity);
         recipeEntity.setTier(tierEntity);
         tierEntity.getRecipeList().add(recipeEntity);
+
         for (RecipeIngredientVO ingredientVo : recipeSnapshot.getComponentList()){
             IngredientEntity ingredientEntity = IngredientDatabaseMapper.fromRecipeIngredientVO(ingredientVo);
-
             ingredientRepository.save(ingredientEntity);
+            IngredientNameEntity ingredientNameEntity = ingredientNameRepository.findFirstByName(ingredientVo.getIngredientName());
+            if (ingredientNameEntity == null){
+                ingredientNameEntity = new IngredientNameEntity(null,ingredientVo.getIngredientName(),new ArrayList<>());
+            }
+            ingredientNameRepository.save(ingredientNameEntity);
+            ingredientEntity.setIngredientName(ingredientNameEntity);
+            ingredientNameEntity.getIngredients().add(ingredientEntity);
             recipeEntity.getComponentList().add(ingredientEntity);
             ingredientEntity.setRecipeList(recipeEntity);
             for (RecipeMeasurementVO measurementV0: ingredientVo.getMeasurementList()){
@@ -70,6 +77,7 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO, GetReci
                 ingredientEntity.getMeasurementEntityList().add(measurementEntity);
             }
         }
+
         //↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
         return true;
     }
@@ -104,7 +112,7 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO, GetReci
 
             for (RecipeEntity recipeEntity : recipeEntities){
                 for(IngredientEntity ingredientEntity: recipeEntity.getComponentList()){
-                    if (filtersDTO.getIngredients().contains(ingredientEntity.getIngredientName())){
+                    if (filtersDTO.getIngredients().contains(ingredientEntity.getIngredientName())){//getIngredientName() ovverided in IngredientEntity
                         recipeEntitiesresult.add(recipeEntity);
                         break;
                     }

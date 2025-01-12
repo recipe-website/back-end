@@ -1,7 +1,6 @@
 package com.recipe.recipewebsite.infrastructure.controller;
 
 import com.recipe.recipewebsite.core.model.RecipeSnapshot;
-import com.recipe.recipewebsite.core.model.vo.RecipeIngredientVO;
 import com.recipe.recipewebsite.core.model.vo.RecipeTierVO;
 import com.recipe.recipewebsite.core.service.*;
 import com.recipe.recipewebsite.core.service.dto.FiltersDTO;
@@ -47,10 +46,6 @@ public class RecipeRESTController {
     public ResponseEntity<List<RecipeSnapshot>> getAllRecipes() {
         return new ResponseEntity<>(getAllRecipesUseCase.getAllRecipes(), HttpStatus.OK);
     }
-//    @GetMapping(value = "allRecipesFromDB")
-//    public ResponseEntity<List<RecipeSnapshot>> getAllRecipesFromDB() {
-//        return new ResponseEntity<>(getAllRecipesFromDBUseCase.getAllRecipesFromDB(), HttpStatus.OK);
-//    }
     @GetMapping(value = "allRecipesFromDB")
     public ResponseEntity<List<RecipeSnapshot>> getAllRecipesFromDBWithFilters(
             @RequestParam(required = false) Integer difficulty,
@@ -74,7 +69,7 @@ public class RecipeRESTController {
     }
 
     @GetMapping(value = "allIngredients")
-    public  ResponseEntity<List<RecipeIngredientVO>> getAllIngredients() {
+    public  ResponseEntity<List<String>> getAllIngredients() {
         return new ResponseEntity<>(getAllIngredientsUseCase.getAllIngredients(),HttpStatus.OK);
     }
 

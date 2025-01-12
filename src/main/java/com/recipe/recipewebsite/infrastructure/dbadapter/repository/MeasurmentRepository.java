@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MeasurmentRepository extends CrudRepository<MeasurementEntity,Long> {
-//    MeasurementEntity findFirstByQuantityAndAndUnitNameAndUnitSystem(String quantity, String unitName,String unitSystem);
 }
