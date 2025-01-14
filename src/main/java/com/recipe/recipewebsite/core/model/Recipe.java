@@ -24,6 +24,7 @@ public class Recipe {
     private final Integer numberOfServings;
     private final RecipeNutritionVO nutrition;
     private final Double totalTimeMinutes;
+    private final Integer difficulty;
     private final RecipeTierVO tier;
     private final List<RecipeIngredientVO> componentList;
     private final String thumbnailUrl;
@@ -33,7 +34,7 @@ public class Recipe {
 
     private Recipe(RecipeId recipeId, String title, String description, String canonicalId, List<String> creditList,
                    List<String> instructionList, String language, Integer numberOfServings,
-                   RecipeNutritionVO nutrition, Double totalTimeMinutes, RecipeTierVO tier,
+                   RecipeNutritionVO nutrition, Double totalTimeMinutes, Integer difficulty, RecipeTierVO tier,
                    List<RecipeIngredientVO> componentList, String thumbnailUrl, String originalVideoUrl) {
         this.recipeId = recipeId;
         this.title = title;
@@ -45,6 +46,7 @@ public class Recipe {
         this.numberOfServings = numberOfServings;
         this.nutrition = nutrition;
         this.totalTimeMinutes = totalTimeMinutes;
+        this.difficulty = difficulty;
         this.tier = tier;
         this.componentList = componentList;
         this.thumbnailUrl = thumbnailUrl;
@@ -53,7 +55,7 @@ public class Recipe {
 
     private Recipe(String title, String description, String canonicalId, List<String> creditList,
                    List<String> instructionList, String language, Integer numberOfServings,
-                   RecipeNutritionVO nutrition, Double totalTimeMinutes, RecipeTierVO tier,
+                   RecipeNutritionVO nutrition, Double totalTimeMinutes, Integer difficulty, RecipeTierVO tier,
                    List<RecipeIngredientVO> componentList, String thumbnailUrl, String originalVideoUrl) {
 
         this.recipeId =new RecipeId(UUID.randomUUID());//nie jestem pewien czy to tu powinno być
@@ -66,6 +68,7 @@ public class Recipe {
         this.numberOfServings = numberOfServings;
         this.nutrition = nutrition;
         this.totalTimeMinutes = totalTimeMinutes;
+        this.difficulty = difficulty;
         this.tier = tier;
         this.componentList = componentList;
         this.thumbnailUrl = thumbnailUrl;
@@ -126,6 +129,7 @@ public class Recipe {
                         recipeListResult.getNutrition().getSugar()
                 ),
                 recipeListResult.getTotal_time_minutes(),
+                calculateDifficulty(componentsList.size(), recipeListResult.getTotal_time_minutes()),
                 new RecipeTierVO( recipeListResult.getTotal_time_tier().getTier(),
                 recipeListResult.getTotal_time_tier().getDisplay_tier()),
                 componentsList,
@@ -153,6 +157,8 @@ public class Recipe {
                         recipeInitialDTO.nutrition().sugar()
                 ),
                 recipeInitialDTO.totalTimeMinutes(),
+                calculateDifficulty(recipeInitialDTO.componentList().size(),
+                        recipeInitialDTO.totalTimeMinutes()),
                 new RecipeTierVO(recipeInitialDTO.tier(),recipeInitialDTO.displayTier()),
                 recipeInitialDTO.componentList()
                         .stream()
@@ -192,6 +198,7 @@ public class Recipe {
                         recipeSelectDTO.nutrition().getSugar()
                 ),
                 recipeSelectDTO.totalTimeMinutes(),
+                calculateDifficulty(recipeSelectDTO.componentList().size(), recipeSelectDTO.totalTimeMinutes()),
                 TierDatabaseMapper.fromTierEntity(recipeSelectDTO.tier()),
                 recipeSelectDTO.componentList().stream().map(IngredientDatabaseMapper::fromIngredientEntity).toList(),
                 recipeSelectDTO.thumbnailUrl(),
@@ -201,5 +208,11 @@ public class Recipe {
 
     public RecipeSnapshot toSnapshot(){
         return new RecipeSnapshot(this);
+    }
+
+    private static Integer calculateDifficulty(Integer firstArg, Double secondArg){
+        return (int) Math.floor(1.0
+                + Math.floor(firstArg/6.0)
+                + secondArg/15.0);
     }
 }

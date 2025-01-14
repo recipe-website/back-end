@@ -19,6 +19,7 @@ public class RecipeSnapshot {
     private final Integer numberOfServings;
     private final RecipeNutritionVO nutrition;
     private final Double totalTimeMinutes;
+    private final Integer difficulty;
     private final RecipeTierVO tier;
     private final List<RecipeIngredientVO> componentList;
     private final String thumbnailUrl;
@@ -35,6 +36,7 @@ public class RecipeSnapshot {
         this.numberOfServings = recipe.getNumberOfServings();
         this.nutrition = recipe.getNutrition();
         this.totalTimeMinutes = recipe.getTotalTimeMinutes();
+        this.difficulty = recipe.getDifficulty();
         this.tier = recipe.getTier();
         this.componentList = recipe.getComponentList();
         this.thumbnailUrl = recipe.getThumbnailUrl();

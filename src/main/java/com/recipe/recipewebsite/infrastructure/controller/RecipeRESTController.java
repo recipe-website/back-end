@@ -18,7 +18,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/recipe")
 @RequiredArgsConstructor
-@CrossOrigin("{http://localhost:5173, http://localhost:5174}")
+@CrossOrigin("{http://localhost:5173, http://localhost:5174, *.trycloudflare.com}")
 public class RecipeRESTController {
     private final CreateRecipeUseCase createRecipeUseCase;
     private final GetAllRecipesUseCase getAllRecipesUseCase;

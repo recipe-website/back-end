@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -108,7 +109,7 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO, GetReci
         System.out.println(filtersDTO);
         List<RecipeEntity> recipeEntities = recipeRepository.findAll();
         List<RecipeEntity> recipeEntitiesresult = new ArrayList<>();
-        if (filtersDTO.getIngredients() != null){//temp
+        if (filtersDTO.getIngredients() != null){
 
             for (RecipeEntity recipeEntity : recipeEntities){
                 for(IngredientEntity ingredientEntity: recipeEntity.getComponentList()){
@@ -118,12 +119,32 @@ public class RecipeAdapter implements CreateRecipeDAO , GetAllRecipeDAO, GetReci
                     }
                 }
             }
-        }else{//temp
+        } else{//temp
             recipeEntitiesresult = recipeEntities;
         }
-        return recipeEntitiesresult.stream()
+        List<Recipe> recipeList = recipeEntitiesresult.stream()
                 .map(RecipeDatabaseMapper::fromEntity)
-                .map(Recipe::fromSelectDTO)
+                .map(Recipe::fromSelectDTO).toList();
+        if(Objects.nonNull(filtersDTO.getDifficulty())){
+            recipeList = recipeList
+                    .stream()
+                    .filter(recipe -> Objects.equals(filtersDTO.getDifficulty(), recipe.getDifficulty()))
+                    .toList();
+        }
+        if(Objects.nonNull(filtersDTO.getMinTime())){
+            recipeList = recipeList
+                    .stream()
+                    .filter(recipe -> filtersDTO.getMinTime() < recipe.getTotalTimeMinutes())
+                    .toList();
+        }
+        if(Objects.nonNull(filtersDTO.getMaxTime())){
+            recipeList = recipeList
+                    .stream()
+                    .filter(recipe -> filtersDTO.getMaxTime() > recipe.getTotalTimeMinutes())
+                    .toList();
+        }
+        return recipeList
+                .stream()
                 .map(Recipe::toSnapshot)
                 .toList();
     }
