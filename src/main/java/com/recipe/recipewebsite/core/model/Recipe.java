@@ -211,8 +211,9 @@ public class Recipe {
     }
 
     private static Integer calculateDifficulty(Integer firstArg, Double secondArg){
-        return (int) Math.floor(1.0
+        int difficulty = (int) Math.floor(1.0
                 + Math.floor(firstArg/6.0)
                 + secondArg/15.0);
+        return Math.min(difficulty, 5);
     }
 }
